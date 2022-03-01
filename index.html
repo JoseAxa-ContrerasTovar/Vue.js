@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Eventos</title>
+        <title>Directivas</title>
         <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     </head>
     <body>
         <div id="vm">
-            <input type="text" v-model="nombre">
-            <hr>
-            Hola {{nombre}}, Bienvenido al curso de Vue.js
+            <div v-html:src="texto"></div>
+            <img :src="imagen">
+            <div v-text:src="empleado.nombre"></div>
+            <div>{{empleado.apellido}}</div>
+            <template >Inspeccioname</template>
+            <div v-if="mostrar">Verdadero</div>
+            <div v-else="mostrar">Falso</div>
+            <div v-if="parrafo == 1">Primer div</div>
+            <div v-else-if="parrafo == 2">Segundo div</div>
+            <div v-else-if="parrafo == 3">Tercer div</div>
+            <div v-else>No es ni el 1, 2 o 3 div</div>
+            <div v-show="mostrar">Div 1</div>
+            <div >Div 2</div>
+            <ul>
+                <template v-for="(pais, indice) of paises">
+                    <li>
+                        {{indice +1}} - {{pais.nombre}}
+                    </li>
+                    <hr/>
+                </template>
+            </ul>
+            <ul>
+                <li v-for="(valor, llave) in empleado">
+                    {{llave}} -> {{valor}}
+                </li>
+            </ul>
         </div>
         <script src="vue.js"></script>
     </body>
