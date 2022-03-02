@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Eventos</title>
+        <title>Lista de tareas</title>
+        <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     </head>
-    <body>
-        <div id="eventos">
-            <button @click="sumaruno">Sumar uno</button>
-            <button @click="restaruno">Restar uno</button>
-            <hr/>
-            {{contador}}
-            <div> 
-                <button @click="alerta('Ten cuidado me clickeaste muy fuerte')">Mostrar alerta</button>
+    <body class="container">
+        <div id="app" class="jumbotron">
+            <h2>{{titulo}}</h2>
+            <div class="input-group">
+                <input type="text" 
+                placeholder="Escribe una nueva tarea" 
+                v-model="nuevaTarea"
+                class="form-control"
+                @keyup.enter="agregarTarea"
+                >
+                <span class="input-group-btn">
+                    <button type="button" @click="agregarTarea" class="btn btn-primary">Agregar</button>
+                </span>
             </div>
-            <div style="height:300px; border:1px solid blue" @mousemove="mostrarUbicacion" v-on:click.once="sumar(2)">
-                <div style="height:30px; border:1px solid red" @mousemove.stop></div>
-            </div>
-            x: {{x}}, y: {{y}}, contador {{contador}}
-            <input type="text" @keyup.delete="sumar(1)">
+            <ul class="list-group">
+                <li v-for="(tarea, indice) of tareas" class="list-group-item" v-bind:class="{terminada: tarea.terminada}">
+                    {{tarea.texto}}
+                    <span class="pull-right">
+                        <button type="button" class="btn btn-success btn-xs glyphicon glyphicon-ok" @click="tarea.terminada = !tarea.terminada"></button>
+                        <button type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove" @click="borrar(indice)"></button>
+                    </span>
+                </li>           
+            </ul>
         </div>
         <script src="vue.js"></script>
     </body>
