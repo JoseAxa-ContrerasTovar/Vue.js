@@ -1,26 +1,36 @@
 var app = new Vue ({
-    el: '#eventos',
+    el: '#app',
     data:{
-        contador: 0,
-        x: 0,
-        y: 0
+        titulo: 'Lista de tareas',
+        tareas:[
+            {
+                texto: 'Aprender vue.js',
+                terminada:false
+            },
+            {
+                texto: 'Aprender Angular 2',
+                terminada:false
+            },
+            {
+                texto: 'Aprender Ionic 2',
+                terminada:false
+            }
+        ],
+        nuevaTarea:''
     },
     methods: {
-        alerta: function(mensaje){
-            alert(mensaje);
+        agregarTarea: function(){
+            var texto=this.nuevaTarea.trim();
+            if(texto){
+                this.tareas.push({
+                    texto: texto,
+                    terminada:false
+                })
+            } 
+            this.nuevaTarea = ''
         },
-        sumaruno: function(){
-            this.contador += 1;
-        },
-        restaruno: function(){
-            this.contador -= 1;
-        },
-        mostrarUbicacion: function(evento){
-            this.x = evento.clientX;
-            this.y = evento.clientY;
-        },
-        sumar: function(cantidad){
-            this.contador += cantidad;
+        borrar: function(indice){
+            this.tareas.splice(indice,1);
         }
     }
 })
