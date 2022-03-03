@@ -1,48 +1,32 @@
 <template>
-  <div id="app" class="container">
-    <div class="card-body">
-      <titulo :titulo="titulo"></titulo>
-      <nueva-tarea :tareas="tareas" :actualizarContador="actualizarContador"></nueva-tarea>
-      <lista-tareas :tareas="tareas"></lista-tareas>
+  <div class="container">
+    <div class="jumbotron">
+      <button class="btn btn-primary" @click="componenteSeleccionado = 'iniciarSesion'">Iniciar sesión</button>
+      <button class="btn btn-primary" @click="componenteSeleccionado = 'cambiarClave'">Cambiar contraseña</button>
+
+      <keep-alive>
+        <component :is="componenteSeleccionado"></component>
+      </keep-alive>
     </div>
   </div>
 </template>
 
 <script>
-import Titulo from "./TituloComponent.vue";
-import NuevaTarea from "./NuevaTareaComponent.vue";
-import ListaTareas from "./ListaTareasComponents.vue";
+import MostrarFormulario from "./mostrarFormulario.vue";
+import IniciarSesion from "./iniciarSesion.vue";
+import CambiarClave from "./cambiarClave.vue";
 
 export default {
   components: {
-    Titulo,
-    NuevaTarea,
-    ListaTareas
+    mostrarFormulario: MostrarFormulario,
+    iniciarSesion: IniciarSesion,
+    cambiarClave: CambiarClave
   },
   data() {
-    return {
-      titulo: "*Mi lista de tareas*",
-      tareas: [
-        {
-          texto: "Aprender vue.js",
-          terminada: false,
-        },
-        {
-          texto: "Aprender Angular 2",
-          terminada: false,
-        },
-        {
-          texto: "Aprender Ionic 2",
-          terminada: false,
-        },
-      ],
-    };
-  },
-  methods:{
-    actualizarContador(){
-      this.numTareas++
+    return{
+      componenteSeleccionado: 'iniciarSesion'
     }
-  }
+  },
 };
 </script>
 
