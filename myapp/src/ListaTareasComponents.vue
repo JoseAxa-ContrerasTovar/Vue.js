@@ -6,7 +6,7 @@
       :class="{ terminada: tarea.terminada }"
     >
       {{ tarea.texto }}
-      <span class="float-end">
+      <span class="float-right">
         <button
           type="button"
           class="btn btn-success"
@@ -28,8 +28,8 @@ export default {
   methods: {
     borrar: function (indice) {
       this.tareas.splice(indice, 1);
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -7,7 +7,10 @@
     "preview": "vite preview --port 5050"
   },
   "dependencies": {
-    "vue": "^3.2.31"
+    "firebase": "^9.6.7",
+    "vue": "^3.2.31",
+    "vue-resource": "^1.5.3",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.2",

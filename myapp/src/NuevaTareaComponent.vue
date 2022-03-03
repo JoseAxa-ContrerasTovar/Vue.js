@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import { bus } from "./main.js";
+import VueResources from 'vue-resource'
 export default {
   data() {
     return {
       nuevaTarea: "",
     };
   },
-  props: ["tareas", "actualizarContador"],
+  props: ["tareas"],
   methods: {
     agregarTarea() {
       var texto = this.nuevaTarea.trim();
@@ -32,14 +32,13 @@ export default {
           texto: texto,
           terminada: false,
         });
-        bus.$emit("actualizarContador", this.tareas.lenght);
-        //this.actualizarContador();
       }
       this.nuevaTarea = "";
+      this.$http.post('https://tareas-4b193-default-rtdb.firebaseio.com/tareas.json',{
+        texto: texto,
+        terminada: false
+      }).then(respuesta => console.log(respuesta));
     },
   },
-    created(){
-      bus.$emit("actualizarContador", this.tareas.lenght);
-    }
 };
 </script>

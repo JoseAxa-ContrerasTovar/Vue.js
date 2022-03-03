@@ -1,9 +1,11 @@
 import { createApp, VueElement} from 'vue'
 import App from './App.vue'
+import VueResources from 'vue-resource'
 
-Vue.filter('suspensivos', function(texto){
-    return texto.substring(0, 10) + '...';
-})
+const app = createApp(App)
 
-createApp(App).mount('#app')
+app.mount('#app')
+
+app.use(VueResources)
+//createApp(App).mount('#app')
 
