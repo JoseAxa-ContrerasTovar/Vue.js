@@ -1,33 +1,41 @@
 <template>
   <div id="app" class="container">
     <div class="jumbotron">
-      <span>
-        {{ mensaje | suspensivos | mayusculas}}
-      </span>
-      <hr>
-      <span>
-        {{ temperatura | aFarenheit}}
-      </span>
+      <titulo :titulo="titulo"></titulo>
+      <nueva-tarea :tareas="tareas" :actualizarContador="actualizarContador"></nueva-tarea>
+      <lista-tareas :tareas="tareas"></lista-tareas>
     </div>
   </div>
 </template>
 
 <script>
+import Titulo from "./TituloComponent.vue";
+import NuevaTarea from "./NuevaTareaComponent.vue";
+import ListaTareas from "./ListaTareasComponents.vue";
 export default {
-  data(){
+  components: {
+    Titulo,
+    NuevaTarea,
+    ListaTareas
+  },
+  data() {
     return {
-      mensaje: 'Aprende vue.js facilmente',
-      temperatura: 30
-    }
+      titulo: "*Mi lista de tareas*",
+      tareas: [],
+      nuevaTarea:''
+    };
   },
-  filters: {
-  mayuscula (mensaje) {
-    return mensaje.toUppercase()
-  },
-  aFarenheit( temperatura ){
-    return (9/5 * temperatura) + 32 + 'F';
+  created(){
+    this.$http.get('https://tareas-4b193-default-rtdb.firebaseio.com/tareas.json')
+    .then(respuesta => {
+      return respuesta.json()
+    })
+    .then(respuestaJSON => {
+      for(id in respuestaJSON){
+        this.tareas.push(respuestaJSON[id])
+      }
+    })
   }
-}
 };
 </script>
 

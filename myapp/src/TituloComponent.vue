@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import { bus } from './main.js'
 export default {
     props: ['titulo'],
     data(){
@@ -19,10 +18,5 @@ export default {
             return this.titulo.toUpperCase();
         }
     },
-    created(){
-        bus.$on('actualizarContador', (numTareas) => {
-            this.numTareas = numTareas;
-        })
-    }
 }
 </script>
