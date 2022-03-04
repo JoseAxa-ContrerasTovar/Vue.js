@@ -1,41 +1,23 @@
 <template>
   <div id="app" class="container">
+    <encabezado></encabezado>
     <div class="jumbotron">
-      <titulo :titulo="titulo"></titulo>
-      <nueva-tarea :tareas="tareas" :actualizarContador="actualizarContador"></nueva-tarea>
-      <lista-tareas :tareas="tareas"></lista-tareas>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import Titulo from "./TituloComponent.vue";
-import NuevaTarea from "./NuevaTareaComponent.vue";
-import ListaTareas from "./ListaTareasComponents.vue";
+import Encabezado from "./components/encabezado.vue";
+import InicioComponent from './components/inicio.vue'
 export default {
   components: {
-    Titulo,
-    NuevaTarea,
-    ListaTareas
+    encabezado: Encabezado,
+    inicioComponent: InicioComponent,
   },
-  data() {
-    return {
-      titulo: "*Mi lista de tareas*",
-      tareas: [],
-      nuevaTarea:''
-    };
+  mounted() {
+    console.log(this.$router.getRoutes());
   },
-  created(){
-    this.$http.get('https://tareas-4b193-default-rtdb.firebaseio.com/tareas.json')
-    .then(respuesta => {
-      return respuesta.json()
-    })
-    .then(respuestaJSON => {
-      for(id in respuestaJSON){
-        this.tareas.push(respuestaJSON[id])
-      }
-    })
-  }
 };
 </script>
 
