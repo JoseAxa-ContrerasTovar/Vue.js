@@ -1,11 +1,10 @@
 import { createApp, VueElement} from 'vue'
 import App from './App.vue'
-import VueResources from 'vue-resource'
+import router from './router'
 
 const app = createApp(App)
 
-app.mount('#app')
+app.use(router).mount('#app')
 
-app.use(VueResources)
-//createApp(App).mount('#app')
+//createApp(App).use(router).mount('#app')
 
